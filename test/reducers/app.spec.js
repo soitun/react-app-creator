@@ -1,26 +1,14 @@
 import {todoApp} from '../../src/reducers/app';
 import * as actions from '../../src/actions';
 //import immutable from 'immutable';
-import expect from 'expect.js';
+import expect from 'expect';
 
 var assert = require('chai').assert;
 
-describe('Array', function() {
+describe('InboxApp', function() {
   describe('#indexOf()', function() {
     it('should return -1 when the value is not present', function() {
-      assert.equal(-1, [1,2,3].indexOf(5));
-      assert.equal(-1, [1,2,3].indexOf(0));
-    });
-  });
-  describe('reducer test', function() {
-    let state = null;
-    beforeEach(() => {
-      //Setup testing enviroment
-      state = {todos: []}
-    });
-    it('should add todo', () => {
-      state = todoApp(state, actions.addTodo('new todo'));
-      expect(state.todos.length).to.equal(1);
+      expect(1).toEqual(1)
     });
   });
 });

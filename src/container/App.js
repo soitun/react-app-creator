@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { addToto } from '../actions';
 
   
 class App extends Component {
@@ -8,7 +7,7 @@ class App extends Component {
     const { dispatch } = this.props
     return (
       <div>
-        APP
+        APPAP
       </div>
     )
   }

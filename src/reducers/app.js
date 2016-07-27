@@ -4,7 +4,7 @@ const initialState = {
   todos: []
 }
 
-export function todoApp(state = initialState, action) {
+export function inboxApp(state = initialState, action) {
   switch (action.type) {
     case ADD_TODO:
       return Object.assign({}, state, {
@@ -15,8 +15,9 @@ export function todoApp(state = initialState, action) {
             completed: false
           }
         ]
-      })    
+      })
     default:
       return state
   }
 }
+

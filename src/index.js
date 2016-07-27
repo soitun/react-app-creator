@@ -1,32 +1,28 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-//import App from './App';
-//import './index.css';
-//
-//console.log('aaaa')
-//ReactDOM.render(
-//  <App />,
-//  document.getElementById('root')
-//);
-
-//
-import App from './container/App';
+import React from 'react'
+import ReactDOM from 'react-dom'
+  
 import { createStore, applyMiddleware } from 'redux'
-import { Provider } from 'react-redux';
-import { todoApp } from './reducers/app'
+import thunkMiddleware from 'redux-thunk'
+import createLogger from 'redux-logger'
+import { Provider } from 'react-redux'
 
-//logger middleware
-const logger = store => next => action => {
-  console.log('dispatching', action)
-  let result = next(action)
-  console.log('next state', store.getState())
-  return result 
-}
+import { inboxApp } from './reducers/app'
+import App from './container/App'
+
+const loggerMiddleware = createLogger()
 
 let store = createStore(
-  todoApp, 
-  applyMiddleware(logger)
+  inboxApp, 
+  applyMiddleware(
+    thunkMiddleware, //To dispatch async actions
+    loggerMiddleware //Log actions
+  )
 )
+
+import { fetchConversations } from './actions'
+
+window.store = store
+window.fetchConversations = fetchConversations
 
 ReactDOM.render(
   <Provider store={store}>
