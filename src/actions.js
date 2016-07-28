@@ -16,6 +16,10 @@ export const TYPE = {
   REPLY : 'REPLY',
 }
 
+//const testing = process.env.NODE_ENV === 'test';
+//const apiUrl = `${testing ? 'http://localhost' : ''}/api`;
+const APP_STAGE = process.env.APP_STAGE ? process.env.APP_STAGE : 'TEST'
+const api_url = APP_STAGE == 'TEST' ? 'http://test.com' : ''
 
 export function fetchingConversations(){
   return {
@@ -40,12 +44,10 @@ export function fetchConversationsFailure(ex) {
 export function fetchConversations() {
   return dispatch => {
     dispatch(fetchingConversations())
-    return fetch('/inbox/private-conversation/')
-      .then(response => {
-        console.log(response)
-        response.json()
-      })
-      .then(json => dispatch(fetchConversationsSuccess(json)))
+    return fetch(api_url+'/inbox/private-conversation/')
+      .then(response => response.json())
+      .then(json => dispatch(fetchConversationsSuccess(json.body)))
+      .catch(ex => dispatch(fetchConversationsFailure(ex)))
   }
 }
 
