@@ -14,6 +14,8 @@ export const TYPE = {
 
   //Messaging
   REPLY : 'REPLY',
+  
+  ADD_TODO: 'ADD_TODO'
 }
 
 //const testing = process.env.NODE_ENV === 'test';
@@ -51,3 +53,9 @@ export function fetchConversations() {
   }
 }
 
+export function addTodo(text){
+  return {
+    type: TYPE.ADD_TODO,
+    text: text
+  }
+}

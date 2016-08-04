@@ -1,22 +1,23 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import TodoList from './TodoList'
-import {addTodo} from '../actions'
+
   
-class App extends Component {
-  
-  addTodo(){
-    const {dispatch} = this.props
-    dispatch(addTodo('new todo'))
-//    console.log(addTodo('new todo'))
+class TodoList extends Component {
+  renderTodos(){
+    const { todossss } = this.props
+    const Todos = todossss.map((todo, index)=>{
+      return (<div style={style.todo} key={index}>{todo.text}</div>)
+    })
+    
+    return Todos
   }
   
   render() {
-    console.log('render App.js')
+    const Todos = this.renderTodos()
+    console.log('render TodoLists.js')
     return (
       <div>
-        <TodoList />
-        <button onClick={this.addTodo.bind(this)}>Add Todo</button>
+        {Todos}
       </div>
     )
   }
@@ -36,7 +37,7 @@ const style = {
   }
 }
 
-App.propTypes = {
+TodoList.propTypes = {
 //  visibleTodos: PropTypes.arrayOf(PropTypes.shape({
 //    text: PropTypes.string.isRequired,
 //    completed: PropTypes.bool.isRequired
@@ -48,12 +49,11 @@ App.propTypes = {
 //  ]).isRequired
 }
 
-//function select(state) {
-//  return {
-//    todossss: state.todos
-//  }
-//}
+function select(state) {
+  return {
+    todossss: state.todos
+  }
+}
 
-//export default App
 // Wrap the component to inject dispatch and state into it
-export default connect()(App)
+export default connect(select)(TodoList)
